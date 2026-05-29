@@ -28,6 +28,9 @@ dependencies = [
     "python-dotenv>=1.2.2",
 ]
 
+[project.scripts]
+deepagents-acp = "deepagents_acp.__main__:run"
+
 [dependency-groups]
 examples = [
     "langchain-baseten>=0.2.0",

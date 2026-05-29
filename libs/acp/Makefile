@@ -1,4 +1,4 @@
-.PHONY: lint format type typecheck test help test_watch toad
+.PHONY: lint format type typecheck test help test_watch toad install uninstall run
 
 .DEFAULT_GOAL := help
 
@@ -18,6 +18,29 @@ test_watch: ## Run tests in watch mode
 
 toad: ## Run toad ACP server
 	uv run toad acp 'bash ./run.sh'
+
+
+######################
+# INSTALL / RUN
+######################
+
+install: ## Install package locally (editable mode + CLI command)
+	uv sync --group examples
+	@echo ""
+	@echo "✓ Installed. CLI command available in venv:"
+	@echo "    uv run deepagents-acp"
+	@echo ""
+	@echo "  Zed ACP config (macOS/Linux):"
+	@echo '    "command": "uv", "args": ["run", "--project", "'$$(pwd)'", "deepagents-acp"]'
+	@echo ""
+	@echo "  Zed ACP config (Windows):"
+	@echo '    "command": "uv", "args": ["run", "--project", "C:\\path\\to\\libs\\acp", "deepagents-acp"]'
+
+uninstall: ## Uninstall package from venv
+	uv pip uninstall deepagents-acp
+
+run: ## Run demo agent (within venv)
+	uv run deepagents-acp
 
 
 ######################
